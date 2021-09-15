@@ -211,6 +211,24 @@ var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+var loadTasks = function() {
+  var savedTasks = localStorage.getItem("tasks");
+  
+  if (!savedTasks) {
+    return false;
+  }
+  savedTasks = JSON.parse(savedTasks);
+  for (var i = 0; i < savedTasks.length; i++) {
+    //pass each task object into the 'createTaskEl()' function
+    createTaskEl(savedTasks[i]);
+  }
+
+  var listItemEl = document.createElement("li");
+  listItemEl.className = "task-item";
+  listItemEl.setAttribute("data-task-id", tasks[i].id);
+  actionContainerEl.appendChild(editButtonEl);
+}
+
 //for edit and delete buttons
 pageContentEl.addEventListener("click", taskButtonHandler);
 formEl.addEventListener("submit", taskFormHandler);
